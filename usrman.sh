@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# usrman is a shell tool to make, remove, edit users.
+# usrman is a shell tool to make, remove users.
 
 # Error function
 err() {
