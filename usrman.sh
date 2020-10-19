@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# usrman is a shell tool to make, remove users.
+# usrman is a shell tool to make, remove, edit users.
 
 # Error function
 err() {
@@ -20,6 +20,8 @@ warn() {
 # Main program loop
 mainmenu() {
 	clear
+	echo "Please enter your password as permissions are needed to do some actions..."
+	sudo clear
 	warn "Any damage caused by/with this tool is your responsibility."
 	echo "----------------------------"
 	echo "           USRMAN           "
@@ -28,7 +30,11 @@ mainmenu() {
 	echo
 	echo "Press 1 to create a new user."
 	echo "Press 2 to remove a user."
-	echo "Press 3 to exit."
+	echo "Press 3 to add an user to sudoers."
+	echo "Press 4 to print the sudoers file."
+	echo "Press 5 to remove a user from sudoers file."
+	echo "Press 6 to change password of a user."
+	echo "Press 7 to exit."
 	read  -n 1 -p "What do you want to do? " mainmenuinput
 	if [ "$mainmenuinput" = "1" ]; then
 		clear
@@ -37,6 +43,18 @@ mainmenu() {
 		clear
 		removeuser
 	elif [ "$mainmenuinput" = "3" ]; then
+		clear
+		addsudoer
+	elif [ "$mainmenuinput" = "4" ]; then
+		clear
+		print_sudoers
+	elif [ "$mainmenuinput" = "5" ]; then
+		clear
+		removesudoer
+	elif [ "$mainmenuinput" = "6" ]; then
+		clear
+		change_passwd
+	elif [ "$mainmenuinput" = "7" ]; then
 		clear
 		exit_prog
 	else
@@ -125,6 +143,70 @@ exit_prog() {
 		clear
 		exit_prog
 	fi
+}
+
+addsudoer() {
+	# etc/sudoers.tmp
+	warn "Any damage caused by/with this tool is your responsibility."
+	echo "------------------------------"
+	echo "     Add a user to sudoers    "
+	echo "------------------------------"
+	echo
+	read -p "What is the username for the user that is going to be added to the sudoers file? (Type c! to cancel) " username_sudo
+	sudo usermod -aG sudo $username_sudo
+	if [ $? -eq 0 ]; then
+		echo
+	else
+		err "Adding the user to sudoers failed."
+	fi
+	warn "Adding the user to sudoers is done! Returning to main menu in 5 seconds..."
+	sleep 5
+	mainmenu
+}
+
+print_sudoers() {
+	sudo cat /etc/sudoers
+	echo
+	echo
+	warn "Printing the sudoers is done! Returning to main menu in 20 seconds..."
+	sleep 20
+	mainmenu
+}
+
+removesudoer() {
+	warn "Any damage caused by/with this tool is your responsibility."
+	echo "------------------------------"
+	echo "  Remove a user from sudoers  "
+	echo "------------------------------"
+	echo
+	read -p "What is the username for the user that is going to be removed from the sudoers file? (Type c! to cancel) " username_sudo_rem
+	sudo deluser $username_sudo_rem sudo
+	if [ $? -eq 0 ]; then
+		echo
+	else
+		err "Removing the user from sudoers failed."
+	fi
+	warn "Removing the user from sudoers is done! Returning to main menu in 5 seconds..."
+	sleep 5
+	mainmenu
+}
+
+change_passwd() {
+	warn "Any damage caused by/with this tool is your responsibility."
+	echo "------------------------------"
+	echo "         Change password      "
+	echo "------------------------------"
+	echo
+	read -p "Which accounts password do you want to change? (Type c! to cancel) " username_chng_passwd
+	sudo passwd $username_chng_passwd
+	if [ $? -eq 0 ]; then
+		echo
+	else
+		err "Changing the user $username_chng_passwd s password failed."
+	fi
+	warn "Changing the password is done! Returning to main menu in 5 seconds..."
+	sleep 5
+	mainmenu
 }
 
 mainmenu
