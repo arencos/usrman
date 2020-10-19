@@ -21,6 +21,7 @@ warn() {
 mainmenu() {
 	clear
 	echo "Please enter your password as permissions are needed to do some actions..."
+	# This is done so sudo doesnt ask for the password on the first action the user does :D
 	sudo clear
 	warn "Any damage caused by/with this tool is your responsibility."
 	echo "----------------------------"
