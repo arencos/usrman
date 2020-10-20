@@ -35,7 +35,8 @@ mainmenu() {
 	echo "Press 4 to print the sudoers file."
 	echo "Press 5 to remove a user from sudoers file."
 	echo "Press 6 to change password of a user."
-	echo "Press 7 to exit."
+	echo "Press 7 to list all users."
+	echo "Press 8 to exit."
 	read  -n 1 -p "What do you want to do? " mainmenuinput
 	if [ "$mainmenuinput" = "1" ]; then
 		clear
@@ -56,6 +57,9 @@ mainmenu() {
 		clear
 		change_passwd
 	elif [ "$mainmenuinput" = "7" ]; then
+		clear
+		listusers
+	elif [ "$mainmenuinput" = "8" ]; then
 		clear
 		exit_prog
 	else
@@ -207,6 +211,14 @@ change_passwd() {
 	fi
 	warn "Changing the password is done! Returning to main menu in 5 seconds..."
 	sleep 5
+	mainmenu
+}
+
+listusers() {
+	echo "Please wait a bit as this takes some time..."
+	eval getent passwd {$(awk '/^UID_MIN/ {print $2}' /etc/login.defs)..$(awk '/^UID_MAX/ {print $2}' /etc/login.defs)} | cut -d: -f1
+	warn "Printing users is done! Returning to main menu in 10 seconds..."
+	sleep 10
 	mainmenu
 }
 
