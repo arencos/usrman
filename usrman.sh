@@ -24,6 +24,7 @@ mainmenu() {
 	# This is done so sudo doesnt ask for the password on the first action the user does :D
 	sudo clear
 	warn "Any damage caused by/with this tool is your responsibility."
+	warn "Feel free to contribute on https://github.com/arencos/usrman!"
 	echo "----------------------------"
 	echo "           USRMAN           "
 	echo "----------------------------"
