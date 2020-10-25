@@ -139,9 +139,10 @@ addsudoer() {
 	read -p "What is the username for the user that is going to be added to the sudoers file? (Type c! to cancel) " username_sudo
 	if [ "$username_sudo" = "c!" ]; then
 		mainmenu
-	elif
+	else
 		sudo usermod -aG sudo $username_sudo
 	fi
+
 	if [ $? -eq 0 ]; then
 		echo
 	else
@@ -170,7 +171,7 @@ removesudoer() {
 	read -p "What is the username for the user that is going to be removed from the sudoers file? (Type c! to cancel) " username_sudo_rem
 	if [ "$username_sudo_rem" = "c!" ]; then
 		mainmenu
-	elif
+	else
 		sudo deluser $username_sudo_rem sudo
 	fi
 	if [ $? -eq 0 ]; then
@@ -192,7 +193,7 @@ change_passwd() {
 	read -p "Which accounts password do you want to change? (Type c! to cancel) " username_chng_passwd
 	if [ "$username_chng_passwd" = "c!" ]; then
 		mainmenu
-	elif
+	else
 		sudo passwd $username_chng_passwd
 	fi
 	if [ $? -eq 0 ]; then
