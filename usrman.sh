@@ -86,20 +86,9 @@ newuser() {
 	else
 		err "Creating the user failed."
 	fi
-	warn "Creating the user is done!"
-	echo "Press 1 to go back to the menu."
-	echo "Press 2 to remove a user."
-	read  -n 1 -p "What do you want to do? " newuserdone
-	if [ "$newuserdone" = "1" ]; then
-		clear
-		mainmenu
-	elif [ "$newuserdone" = "2" ]; then
-		clear
-		removeuser
-	else
-		clear
-		mainmenu
-	fi
+	warn "Creating the user is done! Returning to main menu in 5 seconds..."
+	sleep 5
+	mainmenu
 }
 
 removeuser() {
@@ -119,20 +108,9 @@ removeuser() {
 	else
 		err "Creating the user failed."
 	fi
-	warn "Removing the user is done!"
-	echo "Press 1 to go back to the menu."
-	echo "Press 2 to create a new user."
-	read  -n 1 -p "What do you want to do?:" remuserdone
-	if [ "$remuserdone" = "1" ]; then
-		clear
-		mainmenu
-	elif [ "$remuserdone" = "2" ]; then
-		clear
-		newuser
-	else
-		clear
-		mainmenu
-	fi
+	warn "Removing the user is done! Returning to main menu in 5 seconds..."
+	sleep 5
+	mainmenu
 }
 
 exit_prog() {
