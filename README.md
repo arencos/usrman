@@ -3,7 +3,6 @@ A Linux user manager
 
 
 <h1> How to run? </h1>
-<p> Open a Linux terminal, and type: <b>chmod +x usrman.sh<b> </p>
   <p> Then, to actually run: <b>./usrman.sh</b>
     
 <h1> VERY VERY VERY IMPORTANT NOTES </h1>
