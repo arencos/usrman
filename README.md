@@ -3,7 +3,7 @@ A Linux user manager
 
 
 <h1> How to run? </h1>
-  <p><b>./usrman.sh</b>
+  <p><b>usrman.sh<b>
     
 <h1> VERY VERY VERY IMPORTANT NOTES </h1>
 <p> <b> Any damage caused by/with this tool is your responsibility. <b> </p>
